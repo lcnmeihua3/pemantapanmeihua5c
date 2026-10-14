@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="id" class="notranslate" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google" content="notranslate">
+    <title>Kuis Interaktif Meihua 5 Bab 4c - Neil Armstrong</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Poppins & Noto Sans SC -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'Noto Sans SC', 'sans-serif'],
+                        chinese: ['Noto Sans SC', 'sans-serif']
+                    },
+                    colors: {
+                        space: {
+                            dark: '#0B0F19',
+                            card: '#151C2C',
+                            border: '#2A364F',
+                            accent: '#3B82F6',
+                            gold: '#F59E0B'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Disable text selection and drag */
+        * {
+            -webkit-user-select: none !important;
+            -moz-user-select: none !important;
+            -ms-user-select: none !important;
+            user-select: none !important;
+            -webkit-touch-callout: none !important;
+        }
+
+        body {
+            background-color: #070A12;
+            background-image: 
+                radial-gradient(circle at 15% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(147, 51, 234, 0.15) 0%, transparent 40%);
+            color: #E2E8F0;
+            overflow-x: hidden;
+        }
+
+        /* Pulsing Glow Animation */
+        .glow-box {
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.25);
+        }
+
+        /* Anti-Screenshot Overlay Blur on tab switch */
+        .blur-screen {
+            filter: blur(16px);
+            pointer-events: none;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0B0F19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #2A364F;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between font-sans antialiased relative notranslate" oncontextmenu="return false;" oncopy="return false;" oncut="return false;" onpaste="return false;">
+
+    <!-- Persistent Top Branding Bar -->
+    <header class="w-full bg-space-card/90 backdrop-blur-md border-b border-space-border sticky top-0 z-50 px-4 py-3 flex justify-between items-center shadow-lg">
+        <div class="flex items-center space-x-3">
+            <div class="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-lg shadow-md">
+                <i class="fa-solid fa-rocket"></i>
+            </div>
+            <div>
+                <h1 class="text-sm md:text-base font-bold text-white tracking-wide">MEIHUA 5 BAB 4c</h1>
+                <p class="text-xs text-blue-400"> Sekolah Dasar Maitreyawira Palembang</p>
+            </div>
+        </div>
+        <!-- Required Branch Mark -->
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold text-xs md:text-sm px-3 py-1.5 rounded-full shadow-lg border border-blue-400/30 flex items-center gap-2">
+            <i class="fa-solid fa-[#08994477998] fa-building-flag"></i>
+            <span>by lcnpalembang-08994477998</span>
+        </div>
+    </header>
+
+    <!-- Security Warning Overlay for Tab Switching -->
+    <div id="tabWarningOverlay" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex flex-col items-center justify-center text-center p-6 text-white">
+        <div class="w-20 h-20 bg-red-600/20 text-red-500 rounded-full flex items-center justify-center text-4xl mb-4 border border-red-500/40 animate-bounce">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+        </div>
+        <h2 class="text-2xl font-bold text-red-400 mb-2">PERINGATAN PELANGGARAN!</h2>
+        <p class="text-slate-300 max-w-md mb-6">
+            Anda terdeteksi berpindah tab atau meninggalkan halaman kuis. Dilarang melakukan tindak kecurangan selama kuis berlangsung!
+        </p>
+        <button onclick="resumeQuiz()" class="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-lg shadow-red-600/30">
+            Saya Mengerti, Kembali ke Kuis
+        </button>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow container mx-auto px-4 py-6 max-w-3xl flex flex-col justify-center">
+
+        <!-- SCREEN 1: PLAYER REGISTRATION -->
+        <div id="screenRegistration" class="bg-space-card/80 border border-space-border rounded-2xl p-6 md:p-8 shadow-2xl backdrop-blur-lg">
+            <div class="text-center mb-6">
+                <div class="w-20 h-20 mx-auto bg-gradient-to-tr from-blue-600 to-cyan-400 rounded-full flex items-center justify-center text-4xl shadow-xl mb-3">
+                    <i class="fa-solid fa-user-astronaut text-white"></i>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-bold text-white mb-1">Pembelajaran Interaktif</h2>
+                <p class="text-slate-400 text-sm">Pemantapan Teks: 个人的一小步，人类的一大步</p>
+            </div>
+
+            <form id="formRegister" onsubmit="startQuiz(event)" class="space-y-5">
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">
+                        <i class="fa-solid fa-user mr-1 text-blue-400"></i> Nama Lengkap Siswa
+                    </label>
+                    <input type="text" id="inputPlayerName" required placeholder="Masukkan Nama Lengkap Anda..." 
+                        class="w-full bg-space-dark border border-space-border rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">
+                        <i class="fa-solid fa-chalkboard-user mr-1 text-blue-400"></i> Kelas
+                    </label>
+                    <input type="text" id="inputPlayerClass" required placeholder="Contoh: SD 5A" 
+                        class="w-full bg-space-dark border border-space-border rounded-xl px-4 py-3 text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 transition-colors">
+                </div>
+
+                <div class="bg-blue-950/40 border border-blue-800/40 rounded-xl p-4 text-xs text-blue-200 space-y-2">
+                    <div class="font-semibold text-blue-300 flex items-center gap-2">
+                        <i class="fa-solid fa-shield-halved"></i> ATURAN & KETENTUAN KUIS:
+                    </div>
+                    <ul class="list-disc list-inside space-y-1 text-slate-300">
+                        <li>Dilarang berpindah tab, screenshot, atau menyalin teks.</li>
+                        <li>Soal dan pilihan jawaban akan diacak otomatis.</li>
+                        <li><strong>Syarat Kelulusan Minimal: 90%</strong> (Wajib ulang jika di bawah 90%).</li>
+                    </ul>
+                </div>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2 text-base">
+                    <span>Mulai Kuis Interaktif</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+        </div>
+
+        <!-- SCREEN 2: SECTION INSTRUCTIONS -->
+        <div id="screenInstruction" class="hidden bg-space-card/80 border border-space-border rounded-2xl p-6 md:p-8 shadow-2xl backdrop-blur-lg text-center">
+            <div id="sectionBadge" class="inline-block px-3 py-1 bg-blue-600/20 border border-blue-500/40 text-blue-300 rounded-full text-xs font-bold uppercase tracking-widest mb-4">
+                Bagian 1
+            </div>
+            <h2 id="sectionTitle" class="text-2xl font-bold text-white mb-3">Judul Bagian</h2>
+            
+            <div class="bg-space-dark/60 border border-space-border/80 rounded-xl p-5 mb-6 text-left space-y-3">
+                <h4 class="text-xs font-semibold text-blue-400 uppercase tracking-wider flex items-center gap-2">
+                    <i class="fa-solid fa-circle-info"></i> Petunjuk Mengerjakan Soal:
+                </h4>
+                <p id="sectionGuide" class="text-slate-300 text-sm leading-relaxed">
+                    Petunjuk detail bagian ini...
+                </p>
+            </div>
+
+            <button onclick="beginSectionQuestions()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-600/30 transition-all">
+                Mulai Bagian Ini <i class="fa-solid fa-circle-play ml-2"></i>
+            </button>
+        </div>
+
+        <!-- SCREEN 3: QUIZ QUESTION DISPLAY -->
+        <div id="screenQuiz" class="hidden bg-space-card/80 border border-space-border rounded-2xl p-6 md:p-8 shadow-2xl backdrop-blur-lg">
+            <!-- Progress Bar & Counter -->
+            <div class="mb-6 space-y-2">
+                <div class="flex justify-between items-center text-xs text-slate-400 font-semibold">
+                    <span id="currentSectionLabel">Bagian I</span>
+                    <span id="questionCounter">Soal 1 dari 20</span>
+                </div>
+                <div class="w-full bg-space-dark h-2.5 rounded-full overflow-hidden border border-space-border">
+                    <div id="progressBar" class="bg-gradient-to-r from-blue-500 to-indigo-500 h-full w-0 transition-all duration-300"></div>
+                </div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="bg-space-dark/80 border border-space-border rounded-xl p-5 mb-6">
+                <p id="questionPrompt" class="text-slate-300 text-xs uppercase tracking-wider font-semibold mb-2">Soal Kosakata</p>
+                <h3 id="questionText" class="text-xl md:text-2xl font-bold text-white leading-snug font-chinese">
+                    --
+                </h3>
+                <p id="questionSubtext" class="text-slate-400 text-xs mt-2 italic hidden"></p>
+            </div>
+
+            <!-- Multiple Choice Options -->
+            <div id="optionsContainer" class="grid grid-cols-1 gap-3 mb-6">
+                <!-- Options injected dynamically by JavaScript -->
+            </div>
+
+            <!-- Feedback Alert -->
+            <div id="feedbackBox" class="hidden p-4 rounded-xl text-center text-sm font-bold flex items-center justify-center gap-2 transition-all">
+                <i id="feedbackIcon" class="text-lg"></i>
+                <span id="feedbackMessage"></span>
+            </div>
+        </div>
+
+        <!-- SCREEN 4: FINAL RESULT & SCORE -->
+        <div id="screenResult" class="hidden bg-space-card/80 border border-space-border rounded-2xl p-6 md:p-8 shadow-2xl backdrop-blur-lg text-center">
+            <div id="resultIconBox" class="w-24 h-24 mx-auto rounded-full flex items-center justify-center text-5xl mb-4 border-2">
+                <i id="resultIcon"></i>
+            </div>
+
+            <h2 id="resultTitle" class="text-2xl md:text-3xl font-bold mb-1">--</h2>
+            <p id="resultSubtitle" class="text-slate-400 text-sm mb-6">--</p>
+
+            <!-- Player Details Box -->
+            <div class="bg-space-dark/90 border border-space-border rounded-xl p-5 mb-6 text-left space-y-3">
+                <div class="flex justify-between border-b border-space-border/60 pb-2 text-sm">
+                    <span class="text-slate-400">Nama Pemain:</span>
+                    <span id="resPlayerName" class="font-bold text-white">--</span>
+                </div>
+                <div class="flex justify-between border-b border-space-border/60 pb-2 text-sm">
+                    <span class="text-slate-400">Kelas:</span>
+                    <span id="resPlayerClass" class="font-bold text-white">--</span>
+                </div>
+                <div class="flex justify-between border-b border-space-border/60 pb-2 text-sm">
+                    <span class="text-slate-400">Jawaban Benar:</span>
+                    <span id="resCorrectCount" class="font-bold text-green-400">0 / 20</span>
+                </div>
+                <div class="flex justify-between items-center pt-1">
+                    <span class="text-slate-400 font-semibold">Total Nilai Akhir:</span>
+                    <span id="resPercentage" class="text-3xl font-extrabold text-blue-400">0%</span>
+                </div>
+            </div>
+
+            <!-- Requirement Warning Message if < 90% -->
+            <div id="repeatRequirementNotice" class="hidden bg-red-950/60 border border-red-700/60 rounded-xl p-4 text-xs text-red-200 mb-6 flex items-start gap-3 text-left">
+                <i class="fa-solid fa-triangle-exclamation text-red-400 text-lg mt-0.5"></i>
+                <div>
+                    <p class="font-bold text-red-300">NILAI BELUM MENCAPAI TINGKAT KELULUSAN (MIN. 90%)</p>
+                    <p class="mt-1 text-slate-300">Sesuai ketentuan, Anda diwajibkan mengulang kuis dari awal hingga mencapai skor minimal 90%.</p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-3">
+                <button id="btnRetryQuiz" onclick="restartWholeQuiz()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <span>Ulangi Kuis Dari Awal</span>
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer watermark -->
+    <footer class="w-full py-3 text-center text-xs text-slate-500 border-t border-space-border/40 bg-space-dark/50">
+        <p>Meihua 5 Bab 4c Pemantapan Interactive Quiz &copy; 2026 | <span class="text-blue-400 font-medium">by lcnpalembang-08994477998</span></p>
+    </footer>
+
+    <script>
+        /* ----------------------------------------------------
+         * AUDIO SYNTHESIZER (Web Audio API)
+         * ---------------------------------------------------- */
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playSound(type) {
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            const now = audioCtx.currentTime;
+
+            if (type === 'correct') {
+                // High pitch chime sequence (C5 -> E5 -> G5)
+                const freq = [523.25, 659.25, 783.99];
+                freq.forEach((f, idx) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(f, now + idx * 0.08);
+                    gain.gain.setValueAtTime(0.15, now + idx * 0.08);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.25);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now + idx * 0.08);
+                    osc.stop(now + idx * 0.08 + 0.25);
+                });
+            } else if (type === 'wrong') {
+                // Low pitch error buzz (F3 -> Db3)
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(174.61, now);
+                osc.frequency.exponentialRampToValueAtTime(138.59, now + 0.3);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start(now);
+                osc.stop(now + 0.35);
+            } else if (type === 'pass') {
+                // Fanfare sound
+                [523.25, 659.25, 783.99, 1046.50].forEach((f, idx) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(f, now + idx * 0.12);
+                    gain.gain.setValueAtTime(0.2, now + idx * 0.12);
+                    gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.12 + 0.4);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now + idx * 0.12);
+                    osc.stop(now + idx * 0.12 + 0.4);
+                });
+            }
+        }
+
+        /* ----------------------------------------------------
+         * QUIZ DATA STRUCTURE (4 SECTIONS)
+         * ---------------------------------------------------- */
+        
+        // Raw Section 1: Kosakata Matching (Chinese to Indonesian)
+        const rawSection1 = [
+            {
+                q: "宇航员",
+                pinyin: "yǔ háng yuán",
+                options: ["Astronaut / Antariksawan", "Pilot Pesawat", "Ilmuwan Astronomi", "Kapten Kapal"],
+                answer: 0
+            },
+            {
+                q: "望远镜",
+                pinyin: "wàng yuǎn jìng",
+                options: ["Teleskop / Teropong", "Kaca Pembesar", "Kamera Digital", "Kacamata Hitam"],
+                answer: 0
+            },
+            {
+                q: "驾驶",
+                pinyin: "jià shǐ",
+                options: ["Mengemudi / Mengendarai", "Terbang tinggi", "Melihat jauh", "Menulis pesan"],
+                answer: 0
+            },
+            {
+                q: "梦想",
+                pinyin: "mèng xiǎng",
+                options: ["Cita-cita / Impian", "Tidur malam", "Pekerjaan harian", "Kenyataan"],
+                answer: 0
+            },
+            {
+                q: "人类",
+                pinyin: "rén lèi",
+                options: ["Umat Manusia", "Tetangga dekat", "Teman sekelas", "Orang asing"],
+                answer: 0
+            },
+            {
+                q: "太空",
+                pinyin: "tài kōng",
+                options: ["Luar Angkasa", "Langit Biru", "Awan Putih", "Bumi Indah"],
+                answer: 0
+            },
+            {
+                q: "飞行员",
+                pinyin: "fēi xíng yuán",
+                options: ["Pilot / Penerbang", "Astronaut", "Dokter", "Guru"],
+                answer: 0
+            },
+            {
+                q: "月球",
+                pinyin: "yuè qiú",
+                options: ["Bulan (Satelit Bumi)", "Bintang", "Matahari", "Planet Mars"],
+                answer: 0
+            },
+            {
+                q: "有名",
+                pinyin: "yǒu míng",
+                options: ["Terkenal / Populer", "Memiliki nama", "Sangat besar", "Luar biasa"],
+                answer: 0
+            },
+            {
+                q: "除了",
+                pinyin: "chú le",
+                options: ["Selain / Disamping", "Tetapi", "Sangat", "Meskipun"],
+                answer: 0
+            }
+        ];
+
+        // Raw Section 2: Sentence Fill-in-blanks (Pinyin replaced with Hanzi as requested)
+        const rawSection2 = [
+            {
+                q: "在小的时候，有一个很喜欢飞机的男孩子。他的____是当一个飞行员。",
+                sub: "Pilih Karakter Hanzi yang Tepat untuk melengkapi kalimat di atas.",
+                options: ["梦想", "望远镜", "宇航员", "驾驶"],
+                answer: 0
+            },
+            {
+                q: "他晚上经常和邻居用____去看月亮和星星。",
+                sub: "Pilih Karakter Hanzi yang Tepat untuk melengkapi kalimat di atas.",
+                options: ["望远镜", "飞行员", "其他", "人类"],
+                answer: 0
+            },
+            {
+                q: "十六岁的时候，他学会了____飞机。",
+                sub: "Pilih Karakter Hanzi yang Tepat untuk melengkapi kalimat di atas.",
+                options: ["驾驶", "梦想", "步", "句"],
+                answer: 0
+            },
+            {
+                q: "1962年，他第二个梦想也实现了：他当了____！",
+                sub: "Pilih Karakter Hanzi yang Tepat untuk melengkapi kalimat di atas.",
+                options: ["宇航员", "飞行员", "邻居", "明星"],
+                answer: 0
+            },
+            {
+                q: "1969年7月20日，他和另外两位宇航员登上了____。",
+                sub: "Pilih Karakter Hanzi yang Tepat untuk melengkapi kalimat di atas.",
+                options: ["月球", "太空", "飞机", "大山"],
+                answer: 0
+            }
+        ];
+
+        // Raw Section 3: Reading Comprehension
+        const rawSection3 = [
+            {
+                q: "男孩子晚上经常做什么？",
+                sub: "Jawablah pertanyaan berdasarkan teks bacaan Neil Armstrong.",
+                options: [
+                    "用望远镜去看月亮和星星",
+                    "在家里学习驾驶飞机",
+                    "和邻居一起做游戏",
+                    "在床上睡大觉"
+                ],
+                answer: 0
+            },
+            {
+                q: "尼尔·阿姆斯特朗的第二个梦想是什么？",
+                sub: "Jawablah pertanyaan berdasarkan teks bacaan Neil Armstrong.",
+                options: [
+                    "飞向太空 (当宇航员)",
+                    "学会驾驶飞机 (当飞行员)",
+                    "买一台更大的望远镜",
+                    "成为一名著名的老师"
+                ],
+                answer: 0
+            },
+            {
+                q: "尼尔·阿姆斯特朗的第二个梦想是什么时候实现的？",
+                sub: "Jawablah pertanyaan berdasarkan teks bacaan Neil Armstrong.",
+                options: ["1962年", "1969年", "十六岁的时候", "1990年"],
+                answer: 0
+            },
+            {
+                q: "尼尔·阿姆斯特朗登上月球时，一共有几位宇航员一起？",
+                sub: "Jawablah pertanyaan berdasarkan teks bacaan Neil Armstrong.",
+                options: [
+                    "一共3位 (他和其他2位宇航员)",
+                    "只有他一个人",
+                    "一共2位宇航员",
+                    "一共4位宇航员"
+                ],
+                answer: 0
+            },
+            {
+                q: "在他登上月球之前，有人去过月球吗？",
+                sub: "Jawablah pertanyaan berdasarkan teks bacaan Neil Armstrong.",
+                options: [
+                    "没有，没有人去过月球",
+                    "有，很多人去过",
+                    "有，他的邻居去过",
+                    "课文里没有写"
+                ],
+                answer: 0
+            }
+        ];
+
+        // Raw Section 4: True / False (判断对错) - REMOVED INDONESIAN TEXT COMPLETELY AS REQUESTED!
+        const rawSection4 = [
+            {
+                q: "1. 男孩子的邻居有一台很小的望远镜。",
+                sub: "判断对错 (Benar/Salah berdasarkan teks)",
+                options: ["错 (Salah)", "对 (Benar)"],
+                answer: 0 // 错 (False, the boy had a big telescope)
+            },
+            {
+                q: "2. 男孩子十六岁的时候学会了驾驶飞机。",
+                sub: "判断对错 (Benar/Salah berdasarkan teks)",
+                options: ["对 (Benar)", "错 (Salah)"],
+                answer: 0 // 对 (True)
+            },
+            {
+                q: "3. 尼尔·阿姆斯特朗的第一个梦想是飞向太空。",
+                sub: "判断对错 (Benar/Salah berdasarkan teks)",
+                options: ["错 (Salah)", "对 (Benar)"],
+                answer: 0 // 错 (False, 1st dream was to be a pilot)
+            },
+            {
+                q: "4. 尼尔·阿姆斯特朗在1969年7月20日登上了月球。",
+                sub: "判断对错 (Benar/Salah berdasarkan teks)",
+                options: ["对 (Benar)", "错 (Salah)"],
+                answer: 0 // 对 (True)
+            },
+            {
+                q: "5. 尼尔·阿姆斯特朗是第一个登上月球的人。",
+                sub: "判断对错 (Benar/Salah berdasarkan teks)",
+                options: ["对 (Benar)", "错 (Salah)"],
+                answer: 0 // 对 (True)
+            }
+        ];
+
+        /* ----------------------------------------------------
+         * STATE VARIABLES
+         * ---------------------------------------------------- */
+        let playerName = "";
+        let playerClass = "";
+        let currentSectionIndex = 0; // 0 to 3
+        let currentQuestionInSection = 0;
+        let globalQuestionIndex = 0; // 0 to 19 (total 20 questions)
+        let totalCorrect = 0;
+        let activeQuestionsQueue = [];
+        let isAnsweringBlocked = false;
+
+        const sectionMetadata = [
+            {
+                badge: "BAGIAN I",
+                title: "Bagian I: Kosakata (生词)",
+                guide: "Pilihlah arti kata Bahasa Indonesia yang tepat untuk setiap kosakata Mandarin berikut ini."
+            },
+            {
+                badge: "BAGIAN II",
+                title: "Bagian II: Melengkapi Teks (填空)",
+                guide: "Isilah titik-titik pada kalimat cerita Neil Armstrong dengan memilih Karakter Hanzi yang paling tepat."
+            },
+            {
+                badge: "BAGIAN III",
+                title: "Bagian III: Pemahaman Teks (课文问答)",
+                guide: "Bacalah pertanyaan dan pilih jawaban yang paling sesuai dengan isi teks cerita Neil Armstrong."
+            },
+            {
+                badge: "BAGIAN IV",
+                title: "Bagian IV: 判断对错 (Benar atau Salah)",
+                guide: "Pilihlah 对 (Benar) atau 错 (Salah) untuk pernyataan berikut berdasarkan isi teks. (Soal disajikan murni Bahasa Mandarin)."
+            }
+        ];
+
+        /* Helper Utility: Fisher-Yates Shuffle */
+        function shuffleArray(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        /* Shuffle Question Options while preserving correct answer tracking */
+        function prepareShuffledQuestion(item) {
+            const correctAnswerText = item.options[item.answer];
+            const shuffledOptions = shuffleArray(item.options);
+            const newAnswerIndex = shuffledOptions.indexOf(correctAnswerText);
+            
+            return {
+                ...item,
+                options: shuffledOptions,
+                answer: newAnswerIndex
+            };
+        }
+
+        /* ----------------------------------------------------
+         * FLOW CONTROL FUNCTIONS
+         * ---------------------------------------------------- */
+
+        function startQuiz(e) {
+            e.preventDefault();
+            playerName = document.getElementById('inputPlayerName').value.trim();
+            playerClass = document.getElementById('inputPlayerClass').value.trim();
+
+            if (!playerName || !playerClass) return;
+
+            // Reset scores & indices
+            currentSectionIndex = 0;
+            globalQuestionIndex = 0;
+            totalCorrect = 0;
+
+            showInstructionForSection(0);
+        }
+
+        function showInstructionForSection(sectionIdx) {
+            currentSectionIndex = sectionIdx;
+            currentQuestionInSection = 0;
+
+            // Prepare shuffled questions queue for this section
+            let rawData;
+            if (sectionIdx === 0) rawData = rawSection1;
+            else if (sectionIdx === 1) rawData = rawSection2;
+            else if (sectionIdx === 2) rawData = rawSection3;
+            else rawData = rawSection4;
+
+            const shuffledQuestions = shuffleArray(rawData).map(prepareShuffledQuestion);
+            activeQuestionsQueue = shuffledQuestions;
+
+            // Hide other screens
+            document.getElementById('screenRegistration').classList.add('hidden');
+            document.getElementById('screenQuiz').classList.add('hidden');
+            document.getElementById('screenResult').classList.add('hidden');
+            
+            // Show Instruction Screen
+            const meta = sectionMetadata[sectionIdx];
+            document.getElementById('sectionBadge').innerText = meta.badge;
+            document.getElementById('sectionTitle').innerText = meta.title;
+            document.getElementById('sectionGuide').innerText = meta.guide;
+            
+            document.getElementById('screenInstruction').classList.remove('hidden');
+        }
+
+        function beginSectionQuestions() {
+            document.getElementById('screenInstruction').classList.add('hidden');
+            document.getElementById('screenQuiz').classList.remove('hidden');
+            renderCurrentQuestion();
+        }
+
+        function renderCurrentQuestion() {
+            isAnsweringBlocked = false;
+
+            // Update Progress Bar
+            const totalQuestionsAll = 20;
+            const progressPercent = (globalQuestionIndex / totalQuestionsAll) * 100;
+            document.getElementById('progressBar').style.width = `${progressPercent}%`;
+            document.getElementById('questionCounter').innerText = `Soal ${globalQuestionIndex + 1} dari 20`;
+            document.getElementById('currentSectionLabel').innerText = sectionMetadata[currentSectionIndex].badge;
+
+            const qData = activeQuestionsQueue[currentQuestionInSection];
+
+            // Set Prompt / Title based on section
+            const promptElem = document.getElementById('questionPrompt');
+            const subtextElem = document.getElementById('questionSubtext');
+            const qTextElem = document.getElementById('questionText');
+
+            if (currentSectionIndex === 0) {
+                promptElem.innerText = "Kosakata (生词) & Pinyin";
+                qTextElem.innerHTML = `${qData.q} <span class="text-blue-400 font-normal text-lg ml-2">(${qData.pinyin})</span>`;
+                subtextElem.classList.add('hidden');
+            } else {
+                promptElem.innerText = sectionMetadata[currentSectionIndex].title;
+                qTextElem.innerText = qData.q;
+                if (qData.sub) {
+                    subtextElem.innerText = qData.sub;
+                    subtextElem.classList.remove('hidden');
+                } else {
+                    subtextElem.classList.add('hidden');
+                }
+            }
+
+            // Hide Feedback Box
+            const feedbackBox = document.getElementById('feedbackBox');
+            feedbackBox.className = "hidden p-4 rounded-xl text-center text-sm font-bold flex items-center justify-center gap-2 transition-all";
+
+            // Render Options
+            const container = document.getElementById('optionsContainer');
+            container.innerHTML = "";
+
+            qData.options.forEach((optText, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left bg-space-dark hover:bg-space-border/50 border border-space-border/80 rounded-xl p-4 text-white text-sm md:text-base font-medium transition-all flex items-center justify-between group";
+                btn.onclick = () => handleAnswerSelect(idx, btn);
+
+                const optionLetter = String.fromCharCode(65 + idx); // A, B, C, D
+                btn.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-lg bg-space-border/40 group-hover:bg-blue-600 text-slate-300 group-hover:text-white flex items-center justify-center text-xs font-bold transition-colors">
+                            ${optionLetter}
+                        </span>
+                        <span class="font-chinese">${optText}</span>
+                    </div>
+                    <i class="fa-solid fa-chevron-right text-slate-500 opacity-0 group-hover:opacity-100 transition-opacity text-xs"></i>
+                `;
+                container.appendChild(btn);
+            });
+        }
+
+        function handleAnswerSelect(selectedIndex, selectedBtn) {
+            if (isAnsweringBlocked) return;
+            isAnsweringBlocked = true;
+
+            const qData = activeQuestionsQueue[currentQuestionInSection];
+            const isCorrect = (selectedIndex === qData.answer);
+
+            const feedbackBox = document.getElementById('feedbackBox');
+            const feedbackIcon = document.getElementById('feedbackIcon');
+            const feedbackMsg = document.getElementById('feedbackMessage');
+
+            if (isCorrect) {
+                totalCorrect++;
+                playSound('correct');
+                selectedBtn.className = "w-full text-left bg-emerald-950/80 border-2 border-emerald-500 rounded-xl p-4 text-emerald-200 text-sm md:text-base font-medium flex items-center justify-between";
+                
+                feedbackBox.className = "p-4 rounded-xl text-center text-sm font-bold flex items-center justify-center gap-2 transition-all bg-emerald-950/90 border border-emerald-500/50 text-emerald-300";
+                feedbackIcon.className = "fa-solid fa-circle-check text-emerald-400 text-xl";
+                feedbackMsg.innerText = "Jawaban Tepat! (+5 Poin)";
+            } else {
+                playSound('wrong');
+                selectedBtn.className = "w-full text-left bg-red-950/80 border-2 border-red-500 rounded-xl p-4 text-red-200 text-sm md:text-base font-medium flex items-center justify-between";
+
+                // Highlight correct button
+                const allButtons = document.getElementById('optionsContainer').children;
+                if (allButtons[qData.answer]) {
+                    allButtons[qData.answer].className = "w-full text-left bg-emerald-950/50 border border-emerald-500/60 rounded-xl p-4 text-emerald-300 text-sm md:text-base font-medium flex items-center justify-between";
+                }
+
+                feedbackBox.className = "p-4 rounded-xl text-center text-sm font-bold flex items-center justify-center gap-2 transition-all bg-red-950/90 border border-red-500/50 text-red-300";
+                feedbackIcon.className = "fa-solid fa-circle-xmark text-red-400 text-xl";
+                feedbackMsg.innerText = `Jawaban Kurang Tepat. Jawaban benar: ${qData.options[qData.answer]}`;
+            }
+
+            feedbackBox.classList.remove('hidden');
+
+            // Delay before next question
+            setTimeout(() => {
+                currentQuestionInSection++;
+                globalQuestionIndex++;
+
+                if (currentQuestionInSection < activeQuestionsQueue.length) {
+                    renderCurrentQuestion();
+                } else {
+                    // Move to next section or end screen
+                    if (currentSectionIndex < 3) {
+                        showInstructionForSection(currentSectionIndex + 1);
+                    } else {
+                        showFinalResults();
+                    }
+                }
+            }, 1600);
+        }
+
+        function showFinalResults() {
+            document.getElementById('screenQuiz').classList.add('hidden');
+            document.getElementById('screenResult').classList.remove('hidden');
+
+            // Update Progress Bar to 100%
+            document.getElementById('progressBar').style.width = '100%';
+
+            const percentage = Math.round((totalCorrect / 20) * 100);
+
+            document.getElementById('resPlayerName').innerText = playerName;
+            document.getElementById('resPlayerClass').innerText = playerClass;
+            document.getElementById('resCorrectCount').innerText = `${totalCorrect} dari 20 Soal`;
+            document.getElementById('resPercentage').innerText = `${percentage}%`;
+
+            const iconBox = document.getElementById('resultIconBox');
+            const resultIcon = document.getElementById('resultIcon');
+            const resultTitle = document.getElementById('resultTitle');
+            const resultSubtitle = document.getElementById('resultSubtitle');
+            const noticeBox = document.getElementById('repeatRequirementNotice');
+
+            if (percentage >= 90) {
+                playSound('pass');
+                iconBox.className = "w-24 h-24 mx-auto rounded-full flex items-center justify-center text-5xl mb-4 bg-emerald-600/20 text-emerald-400 border-2 border-emerald-500 animate-pulse";
+                resultIcon.className = "fa-solid fa-trophy";
+                resultTitle.className = "text-2xl md:text-3xl font-bold text-emerald-400 mb-1";
+                resultTitle.innerText = "SELAMAT! ANDA LULUS!";
+                resultSubtitle.innerText = "Luar biasa! Hasil kerja Anda telah memenuhi syarat kelulusan minimal 90%.";
+                noticeBox.classList.add('hidden');
+            } else {
+                playSound('wrong');
+                iconBox.className = "w-24 h-24 mx-auto rounded-full flex items-center justify-center text-5xl mb-4 bg-red-600/20 text-red-400 border-2 border-red-500";
+                resultIcon.className = "fa-solid fa-circle-xmark";
+                resultTitle.className = "text-2xl md:text-3xl font-bold text-red-400 mb-1";
+                resultTitle.innerText = "BELUM MENCAPAI SYARAT";
+                resultSubtitle.innerText = "Skor Anda masih berada di bawah batas standar minimum 90%.";
+                noticeBox.classList.remove('hidden');
+            }
+        }
+
+        function restartWholeQuiz() {
+            document.getElementById('screenResult').classList.add('hidden');
+            document.getElementById('screenRegistration').classList.remove('hidden');
+        }
+
+        /* ----------------------------------------------------
+         * ANTI-CHEATING & TAB SWITCH DETECTORS
+         * ---------------------------------------------------- */
+        
+        function handleVisibilityViolation() {
+            const overlay = document.getElementById('tabWarningOverlay');
+            if (document.hidden || !document.hasFocus()) {
+                overlay.classList.remove('hidden');
+                document.body.classList.add('blur-screen');
+            }
+        }
+
+        function resumeQuiz() {
+            document.getElementById('tabWarningOverlay').classList.add('hidden');
+            document.body.classList.remove('blur-screen');
+        }
+
+        window.addEventListener('visibilitychange', handleVisibilityViolation);
+        window.addEventListener('blur', handleVisibilityViolation);
+
+        // Block Keyboard Shortcuts (PrintScreen, Ctrl+C, Ctrl+Shift+I, F12, Ctrl+P)
+        window.addEventListener('keydown', function (e) {
+            if (
+                e.key === "PrintScreen" ||
+                (e.ctrlKey && (e.key === 'c' || e.key === 'C' || e.key === 'p' || e.key === 'P' || e.key === 'u' || e.key === 'U')) ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) ||
+                e.key === "F12"
+            ) {
+                e.preventDefault();
+                alert("Tindakan ini dilarang selama kuis berlangsung!");
+            }
+        });
+    </script>
+</body>
+</html>
